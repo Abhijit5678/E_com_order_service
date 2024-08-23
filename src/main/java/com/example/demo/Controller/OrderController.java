@@ -47,6 +47,18 @@ public class OrderController {
 		
 	}
 	
+	@GetMapping("/orders/{orderId}")
+	public ResponseEntity<?> getOrdersById(@PathVariable int orderId)
+	{
+		Response<?> response =new Response<>();
+		
+		Order order= new Order();
+		order=orderservice.getorderdetailsById(orderId);
+		
+		
+		return ResponseEntity.ok(order);
+		
+	}
 	
 	
 	

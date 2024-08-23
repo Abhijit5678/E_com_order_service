@@ -10,5 +10,7 @@ public interface OrderService {
 
 	List<Order> getOrderListByProductId(int productId);
 
+	Order getorderdetailsById(int orderId);
+
 	
 }

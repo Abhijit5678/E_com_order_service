@@ -12,5 +12,7 @@ import com.example.demo.Entiy.Order;
 public interface OrderRepository extends JpaRepository<Order, Integer>{
 	@Query(nativeQuery = true,value = "SELECT * FROM order_tb where productid=?1")
 	List<Order> getOrderListByProductId(int productId);
+	@Query(nativeQuery = true, value = "SELECT * FROM order_tb where orderid=?1")
+	Order getOrderByIde(int orderId);
 
 }

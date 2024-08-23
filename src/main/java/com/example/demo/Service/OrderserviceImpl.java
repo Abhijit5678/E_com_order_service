@@ -26,4 +26,10 @@ public class OrderserviceImpl implements OrderService{
 		return orderrepo.getOrderListByProductId(productId);
 	}
 
+	@Override
+	public Order getorderdetailsById(int orderId) {
+		
+		return orderrepo.getOrderByIde(orderId);
+	}
+
 }
