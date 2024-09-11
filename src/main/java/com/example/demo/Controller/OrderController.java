@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Entiy.Order;
@@ -15,6 +16,7 @@ import com.example.demo.Service.OrderService;
 import com.example.demo.Utils.Response;
 
 @RestController
+@RequestMapping("/orders")
 public class OrderController {
 	@Autowired
 	private OrderService orderservice;
@@ -23,9 +25,7 @@ public class OrderController {
 	public ResponseEntity<Response<?>> createOrder(@RequestBody Order order)
 	{
 		Response<?> response=new Response<Object>();
-		Order ord=new Order();
-		
-		ord=orderservice.saveOrder(order);
+		Order ord=orderservice.saveOrder(order);
 		response.setData(ord);
 		
 		return ResponseEntity.ok(response);
@@ -51,12 +51,9 @@ public class OrderController {
 	public ResponseEntity<?> getOrdersById(@PathVariable int orderId)
 	{
 		Response<?> response =new Response<>();
-		
-		Order order= new Order();
-		order=orderservice.getorderdetailsById(orderId);
-		
-		
-		return ResponseEntity.ok(order);
+		Order order=orderservice.getorderdetailsById(orderId);
+		response.setData(order);
+		return ResponseEntity.ok(response);
 		
 	}
 	

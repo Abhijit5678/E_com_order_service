@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Entiy.Order;
 import com.example.demo.Repository.OrderRepository;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @Service
 public class OrderserviceImpl implements OrderService{
 	
@@ -27,9 +29,14 @@ public class OrderserviceImpl implements OrderService{
 	}
 
 	@Override
+	@CircuitBreaker(name = "order-services", fallbackMethod = "productFallback")
 	public Order getorderdetailsById(int orderId) {
 		
 		return orderrepo.getOrderByIde(orderId);
 	}
+	 
+	public String productFallback(Long id, Throwable throwable) {
+	        return "Fallback: Product Service is unavailable.";
+	    }
 
 }
